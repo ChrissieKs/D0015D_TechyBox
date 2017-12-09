@@ -7,7 +7,7 @@
 </head>
 <body>
 	<header>
-			<?php include('header.php');?>
+		<?php include('header.php');?>
 	</header>
 	<?php
 		$servername = "utbweb.its.ltu.se";
@@ -52,10 +52,11 @@
 		  
 			// If result matched $Mejl and $Password, table row must be 1 row
 			if($count == 1) {
-			 session_start();
-			 $_SESSION['login_user'] = $Mejl;
-			 
-			 header("location: welcome.php");
+				// A session is started for the specific user.
+				session_start();
+				$_SESSION['login_user'] = $Mejl;
+				// If the login is succesful, redirect to the welcome page.
+				header("location: welcome.php");
 			}else {
 			 echo "Your email or Password is invalid";
 			}
@@ -107,7 +108,7 @@
 			</div> <!-- End #loggain -->
 
 			<div id="skapaID" hidden>
-				<form method="post" action="action_skapaID.php">
+				<form method="POST" action="action_skapaID.php">
 					<table>
 						<tr>
 							<td><label for="Namn">Namn:</label></td>
@@ -148,7 +149,7 @@
 			<p>Varje månad får du välja mellan fyra nya produkter som skickas i en vacker box!</p>
 			<p>Kom igång med att tre enkla steg:</p>
 			<ol>
-				<li>Kika in bland våra <a href="http://utbweb.its.ltu.se/~rebmat-5/prenumerera.php">varor.</a></li>
+				<li>Kika in bland våra <a href="http://utbweb.its.ltu.se/~chrkll-4/prenumerera.php">varor.</a></li>
 				<li>Skapa en användare eller logga in.</li>
 				<li>Nu ska du kunna köpa varor!</li>
 			</ol>
