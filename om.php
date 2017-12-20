@@ -30,12 +30,17 @@
 	
 	<h1>Om</h1>
 	<p>TechyBox är ett projekt för unga som är intresserade av teknik</p>
+	<p>Vårt mål är att fler ska bekanta sig med diverse av tekniska prylar som vi erbjuder för att få en bättre problemlösningsförmåga och bättre kunskap kring teknik i allmänhet.</p>
 	<p>Syftet med webbplatsen är att intressera fler unga för teknik samt att för en liten peng kunna få en överraskning i brevlådan en gång i månaden. Det blir som en periodisk julafton med spännande innehåll på boxarna samt med ett vackert motiv.</p>
 	<hr>
 	<h1>Vanliga Frågor</h1>
 	<br>
 	<h2>Hur beställer jag en box?</h2>
 	<p>Kontakta vår kundtjänst på 07XXXXXXXX så kan de hjälpa dig.</p>
+	<h2>Varför kan jag inte se varornas beskrivning?</h2>
+	<p>Hemsidan är just nu under konstruktion, och vi jobbar hårt för att kunna lösa det så snabbt som möjligt.</p>
+	<h2>Hur ändrar jag mina uppgifter/address?</h2>
+	<p>Det sköter administratören. Kontakta vår kundtjänst på 07XXXXXXXX så kan de hjälpa dig.</p>
 	<h2>Varför har jag inte fått en orderbekräftelse?</h2>
 	<p>Kontakta vår kundtjänst på 07XXXXXXXX så kan de hjälpa dig.</p>
 	<h2>Det går inte att logga in! Vad ska jag göra?</h2>

@@ -12,7 +12,7 @@ if (!$conn) {
 	die("Connection failed: " .mysqli_connect_error());
 }
 
-echo "Connection successfully";
+//echo "Connection successfully";
 
 // mysqli_real_escape prevents mySQL Injections. 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,7 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $Mejl = mysqli_real_escape_string($conn, test_input($_POST["Mejl"]));
   $Phone_number = mysqli_real_escape_string($conn, test_input($_POST["Phone_number"]));
   $Address = mysqli_real_escape_string($conn, test_input($_POST["Address"]));
-  $Password = mysqli_real_escape_string($conn, test_input($_POST["Password"]));
+  $Password = password_hash(mysqli_real_escape_string($conn, test_input($_POST["Password"])), PASSWORD_DEFAULT);
+  //echo $Password;
 }
 
 // To get secure inputs. To prevent Cross-Side Scripting (XSS)
@@ -40,7 +41,8 @@ VALUES ('$Name', '$Mejl', '$Address', '$Phone_number', '$Password')";
 
 //echo "<br>", $Name, "<br>", $Mejl, "<br>", $Address, "<br>", $Phone_number, "<br>", $Password;
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+  $message = "Din användare är nu skapad! Testa att logga in!";
+    echo "<script>function varuPopup(){alert($message);}</script>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

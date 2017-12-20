@@ -7,7 +7,7 @@
 </head>
 <body>
 	<header>
-		<?php include('header.php');?>
+			<?php include('header.php');?>
 	</header>
 	<?php
 		$servername = "utbweb.its.ltu.se";
@@ -29,7 +29,6 @@
 	?>
 
 	<?php
-
 		// username and password sent from login form
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -44,21 +43,20 @@
 		    // mysqli_real_escape prevents mySQL Injections. 
 			$Mejl = mysqli_real_escape_string($conn, test_input($_POST['Mejl']));
 			$Password = mysqli_real_escape_string($conn, test_input($_POST['Password'])); 
-			$sql = "SELECT ID FROM Customer WHERE Email = '$Mejl' and Password = '$Password'";
+			$sql = "SELECT ID, Password FROM Customer WHERE Email = '$Mejl'";
 			$result = mysqli_query($conn,$sql);
 			$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 			$active = $row['active'];
 			$count = mysqli_num_rows($result);
-		  
-			// If result matched $Mejl and $Password, table row must be 1 row
-			if($count == 1) {
-				// A session is started for the specific user.
+		  	//echo $Password;
+		  	//echo $result['Password'];
+			// Check password
+			if(password_verify($Password, $row['Password'])) {
 				session_start();
-				$_SESSION['login_user'] = $Mejl;
-				// If the login is succesful, redirect to the welcome page.
-				header("location: welcome.php");
-			}else {
-			 echo "Your email or Password is invalid";
+			 	$_SESSION['login_user'] = $Mejl;
+			 	header("location: welcome.php");
+			} else {
+				echo "Your email or Password is invalid";
 			}
 		}
 
@@ -108,40 +106,38 @@
 			</div> <!-- End #loggain -->
 
 			<div id="skapaID" hidden>
-				<form method="POST" action="action_skapaID.php">
+				<form method="post" action="action_skapaID.php">
 					<table>
 						<tr>
-							<td><label for="Namn">Namn:</label></td>
-							<td><input type="text" name="Name" pattern="{5,40}" required placeholder="Förnamn Efternamn" id="Namn">*</td>
+							<td><label for="Name">Namn:</label></td>
+							<td><input type="text" name="Name" pattern="{5,40}" required placeholder="Förnamn Efternamn" id="Name">*</td>
 						</tr>
 						<tr>
-							<td><label for="Email">Email:</label></td>
-							<td><input type="text" name="Mejl" pattern=".{9,30}" required id="Email">*</td>
+							<td><label for="mejl">Email:</label></td>
+							<td><input type="text" name="Mejl" pattern=".{9,30}" required id="mejl">*</td>
 						</tr>
 						<tr>
-							<td><label for="Adress">Adress:</label></td>
-							<td><input type="text" name="Address" pattern=".{12,40}" required id="Adress">*</td>
+							<td><label for="adress">Adress:</label></td>
+							<td><input type="text" name="Address" pattern=".{12,40}" required id="adress">*</td>
 						</tr>
 						<tr>
 							<td><label for="telefon">Telefon:</label></td>
 							<td><input type="number" name="Phone_number" required id="telefon" placeholder="07XXXXXXXX">*</td>
 						</tr>
 						<tr>
-							<td><label for="Password">Lösenord:</label></td>
-							<td><input type="password" name="Password" pattern=".{8,40}" required id="Password">*</td>
+							<td><label for="password">Lösenord:</label></td>
+							<td><input type="password" name="Password" pattern=".{8,40}" required id="password">*</td>
 						</tr>
 					</table>
 					<br>
-					<input type="submit" name="skapa" value="Spara" onclick="varuPopup()"> 
+					<input type="checkbox" name="agree" required id="villkor">Jag har läst och godkänt <a href="http://utbweb.its.ltu.se/~rebmat-5/om.php">Användarvillkoren</a>.
+					<br>
+					<br>
+					<button type="submit" name="skapa" value="Spara"></button> 
 				</form>
 			</div> <!-- End #skapaID -->
 		</fieldset>
-		<script>
-			// When the user clicks on submit, open the popup alert box
-			function varuPopup() {
-			     alert("Din användare är nu skapad! Testa att logga in!");
-			}
-		</script>
+		
 
 	<div id="Contain-help">
 		<fieldset>

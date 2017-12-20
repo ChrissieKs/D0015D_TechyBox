@@ -21,30 +21,35 @@ include('session.php');
 $sqlq = mysqli_query($conn, "SELECT ID FROM Customer WHERE Email = '$user_check' ");
 $row = mysqli_fetch_array($sqlq,MYSQLI_ASSOC);
 $cusID= $row['ID'];
-echo $cusID;
 
 // Get the ID value from prenumerera.php
 $Item_ID = $_GET['id'];
-echo '<br>';
-echo 'Item ID:';
-echo $Item_ID;
 
-// Get the ID value from prenumerera.php
-
-//echo '<br>';
-//echo 'Price:';
-echo $_GET['price'];
+// Get the price from prenumerera.php
 $Price = $_GET['price'];
 
-// För att lägga till items till databasen.
-$addItem = "INSERT INTO Shoppingcart (Price, Customer_ID, Items_ID)
-VALUES ('$Price', '$cusID' , '$Item_ID')";
+// Get quantity from prenumerera.php
+$quantity = $_GET['quantity'];
 
-if ($conn->query($addItem) === TRUE) {
-    echo "New record created successfully";
-    header("Location: prenumerera.php");
+// Get item row
+$sqlitem = mysqli_query($conn, "SELECT Quantity, Visible FROM Shoppingcart WHERE (Items_ID = '$Item_ID' AND Customer_ID = '$cusID' AND Visible = 'True')");
+If($q = mysqli_fetch_array($sqlitem, MYSQLI_ASSOC)){
+	$num = $q['Quantity'];
+	$quantity = $num + $quantity;
+	$price = $Price * $quantity;
+	$updateItem = "UPDATE Shoppingcart SET Quantity = '$quantity', Price = '$price' WHERE (Customer_ID = '$cusID' AND Items_ID = '$Item_ID' AND Visible = 'True')";
+	if ($conn->query($updateItem) === TRUE) {
+	    header("Location: prenumerera.php");
+	} else {
+	    echo "Error: " . $updateItem . "<br>" . $conn->error;
+	}
 } else {
-    echo "Error: " . $addItem . "<br>" . $conn->error;
+	$addItem = "INSERT INTO Shoppingcart (Price, Customer_ID, Items_ID, Quantity) VALUES ('$Price', '$cusID' , '$Item_ID', '$quantity')";
+	if ($conn->query($addItem) === TRUE) {
+	    header("Location: prenumerera.php");
+	} else {
+	    echo "Error: " . $addItem . "<br>" . $conn->error;
+	}
 }
 
 $conn->close();

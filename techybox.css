@@ -146,6 +146,10 @@ input[type=reset] {
 }
 
 #varukorg-tabell {
+    width: 100%; 
+}
+
+#item-tabell {
     width: 100%;
 }
 
@@ -164,6 +168,19 @@ a:hover, a:active {
 .items {
     display: inline-block;
 } 
+
+.review {
+    table-layout:fixed; 
+    width:300px;
+    padding: 2px;
+    border: 1px;
+}
+
+table.review td { overflow: hidden; }
+
+table.fixed td:nth-of-type(1) {width:100px;}/*Setting the width of column 1.*/
+table.fixed td:nth-of-type(2) {width:100px;}/*Setting the width of column 2.*/
+/*table.fixed td:nth-of-type(3) {width:100px;}Setting the width of column 3.*/
 
 
 .stars {
@@ -221,6 +238,28 @@ a:hover, a:active {
     top:2px;
     left:2px;
 }
+
+/* Admin sidan */
+
+.sokCustomer {
+    border-top: solid;
+    border-color: #9933FF;
+}
+
+.second_container {
+    border-top: solid;
+    border-color: #9933FF;
+}
+
+table.customer-tabell{
+   text-align: left;
+    padding: 5px;
+}
+table.customer-tabell th:nth-of-type(1) {width:100px;}/*Setting the width of column 1.*/
+table.customer-tabell td:nth-of-type(2) {width:100px;}/*Setting the width of column 2.*/
+
+
+
 
 /* Fotmeny */
 
